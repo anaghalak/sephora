@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SEPHORA Beauty</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body{
+    background:#fff;
+    color:#222;
+}
+
+/* Navigation */
+nav{
+    position: fixed;
+    top:0;
+    width:100%;
+    background:black;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 70px;
+    z-index:1000;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+    letter-spacing:3px;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#ff4d88;
+}
+
+.login-btn{
+    background:#ff4d88;
+    color:white;
+    padding:10px 25px;
+    border:none;
+    border-radius:25px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:white;
+    color:black;
+}
+
+
+/* Hero Section */
+
+.hero{
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,.5),
+    rgba(0,0,0,.5)),
+    url("https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9");
+    
+    background-size:cover;
+    background-position:center;
+    
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+}
+
+
+.hero h1{
+    font-size:70px;
+    animation:fadeIn 2s;
+}
+
+.hero p{
+    font-size:22px;
+    margin:20px;
+}
+
+.shop-btn{
+    background:#ff4d88;
+    color:white;
+    border:none;
+    padding:15px 40px;
+    font-size:18px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.shop-btn:hover{
+    background:white;
+    color:black;
+}
+
+
+/* Categories */
+
+section{
+    padding:80px 10%;
+}
+
+.title{
+    text-align:center;
+    font-size:40px;
+    margin-bottom:50px;
+}
+
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+
+.card{
+    background:#fff;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px #ddd;
+    transition:.4s;
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:translateY(-15px);
+    box-shadow:0 20px 35px #aaa;
+}
+
+.icon{
+    font-size:50px;
+}
+
+.card h3{
+    margin-top:15px;
+}
+
+
+/* Products */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+
+.product{
+    box-shadow:0 10px 25px #ddd;
+    border-radius:20px;
+    overflow:hidden;
+    transition:.4s;
+}
+
+
+.product:hover{
+    transform:scale(1.05);
+}
+
+
+.product img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+}
+
+
+.details{
+    padding:20px;
+    text-align:center;
+}
+
+
+.price{
+    color:#ff4d88;
+    font-size:20px;
+    font-weight:bold;
+    margin:10px;
+}
+
+
+.cart-btn{
+    background:black;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+
+/* Offer */
+
+.offer{
+    background:#ffe4ef;
+    text-align:center;
+}
+
+.offer h2{
+    font-size:45px;
+}
+
+.offer p{
+    margin:20px;
+    font-size:18px;
+}
+
+
+/* Newsletter */
+
+.newsletter{
+    text-align:center;
+}
+
+.newsletter input{
+    width:300px;
+    padding:15px;
+    border-radius:25px;
+    border:1px solid gray;
+}
+
+.newsletter button{
+    padding:15px 30px;
+    background:#ff4d88;
+    color:white;
+    border:none;
+    border-radius:25px;
+}
+
+
+/* Footer */
+
+footer{
+    background:black;
+    color:white;
+    text-align:center;
+    padding:40px;
+}
+
+
+/* Animation */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* Mobile */
+
+@media(max-width:900px){
+
+    nav{
+        flex-direction:column;
+        padding:20px;
+        gap:15px;
+    }
+
+    .hero h1{
+        font-size:45px;
+    }
+
+    .categories,
+    .products{
+        grid-template-columns:1fr;
+    }
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+<!-- Navigation -->
+
+<nav>
+
+<div class="logo">
+SEPHORA
+</div>
+
+<ul>
+<li><a href="/register/">register</a></li>
+<li><a href="#">Makeup</a></li>
+<li><a href="#">Skincare</a></li>
+<li><a href="#">Fragrance</a></li>
+<li><a href="#">Offers</a></li>
+</ul>
+
+<a href="/login/">
+    <button class="login-btn">
+        Login
+    </button>
+</a>
+=
+</nav>
+
+
+<!-- Hero -->
+
+<section class="hero">
+
+<div>
+<h1>Reveal Your True Beauty</h1>
+
+<p>
+Luxury cosmetics crafted to make every moment shine.
+</p>
+
+<button class="shop-btn">
+Shop Collection
+</button>
+
+</div>
+
+</section>
+
+
+<!-- Categories -->
+
+<section>
+
+<h2 class="title">
+Shop By Category
+</h2>
+
+<div class="categories">
+
+<div class="card">
+<div class="icon">💄</div>
+<h3>Lipsticks</h3>
+</div>
+
+
+<div class="card">
+<div class="icon">✨</div>
+<h3>Foundation</h3>
+</div>
+
+
+<div class="card">
+<div class="icon">👁</div>
+<h3>Eye Makeup</h3>
+</div>
+
+
+<div class="card">
+<div class="icon">🌸</div>
+<h3>Skincare</h3>
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- Products -->
+
+
+<section>
+
+<h2 class="title">
+Best Sellers
+</h2>
+
+
+<div class="products">
+
+
+<div class="product">
+
+<img src="https://images.unsplash.com/photo-1583241800698-9a68b0c2d1aa">
+
+<div class="details">
+
+<h3>Velvet Lipstick</h3>
+
+<p class="price">
+$25
+</p>
+
+<button class="cart-btn">
+Add To Cart
+</button>
+
+</div>
+
+</div>
+
+
+
+<div class="product">
+
+<img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348">
+
+<div class="details">
+
+<h3>Glow Foundation</h3>
+
+<p class="price">
+$40
+</p>
+
+<button class="cart-btn">
+Add To Cart
+</button>
+
+</div>
+
+</div>
+
+
+
+<div class="product">
+
+<img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796">
+
+<div class="details">
+
+<h3>Luxury Palette</h3>
+
+<p class="price">
+$55
+</p>
+
+<button class="cart-btn">
+Add To Cart
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<!-- Offer -->
+
+<section class="offer">
+
+<h2>
+✨ Beauty Sale 50% OFF
+</h2>
+
+<p>
+Limited-time offer on premium makeup collections.
+</p>
+
+<button class="shop-btn">
+Shop Deals
+</button>
+
+</section>
+
+
+
+<!-- Newsletter -->
+
+<section class="newsletter">
+
+<h2 class="title">
+Join The Beauty Club
+</h2>
+
+
+<input type="email" placeholder="Enter your email">
+
+<button>
+Subscribe
+</button>
+
+
+</section>
+
+
+<!-- Footer -->
+
+
+<footer>
+
+<h2>
+SEPHORA
+</h2>
+
+<br>
+
+<p>
+Where Beauty Meets Elegance
+</p>
+
+<br>
+
+<p>
+© 2026 SEPHORA Beauty. All Rights Reserved.
+</p>
+
+</footer>
+
+
+</body>
+</html>

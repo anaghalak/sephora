@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+        }
+
+        .profile-container{
+            width:400px;
+            margin:50px auto;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        .profile-img{
+            width:150px;
+            height:150px;
+            border-radius:50%;
+            object-fit:cover;
+            border:3px solid #007bff;
+        }
+
+        h2{
+            color:#333;
+        }
+
+        .info{
+            margin-top:20px;
+            text-align:left;
+        }
+
+        .info p{
+            font-size:18px;
+            margin:10px 0;
+        }
+
+        .label{
+            font-weight:bold;
+            color:#007bff;
+        }
+
+        .edit-btn{
+            display:inline-block;
+            margin-top:20px;
+            padding:10px 20px;
+            background:#007bff;
+            color:white;
+            text-decoration:none;
+            border-radius:5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile-container">
+
+    {% if user.profile_pic %}
+        <img src="{{ user.profile_pic.url }}" alt="Profile Picture" class="profile-img">
+    {% else %}
+        <img src="https://via.placeholder.com/150" alt="Default Image" class="profile-img">
+    {% endif %}
+
+    <h2>{{ user.name }}</h2>
+
+    <div class="info">
+        <p><span class="label">Name:</span> {{ user.name }}</p>
+        <p><span class="label">Email:</span> {{ user.email }}</p>
+        <p><span class="label">Password:</span> {{ user.password }}</p>
+    </div>
+    <a href="{% url 'edit_profile' user.id %}" class="edit-btn">
+    Edit Profile
+</a>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+            margin:0;
+            padding:20px;
+        }
+
+        h1{
+            text-align:center;
+            color:#333;
+            margin-bottom:30px;
+        }
+
+        .container{
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px;
+            justify-content:center;
+        }
+
+        .card{
+            width:300px;
+            background:white;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.2);
+            overflow:hidden;
+        }
+
+        .card img{
+            width:100%;
+            height:220px;
+            object-fit:cover;
+        }
+
+        .card-body{
+            padding:15px;
+        }
+
+        .card h3{
+            margin:0;
+            color:#007bff;
+        }
+
+        .price{
+            font-size:20px;
+            font-weight:bold;
+            color:green;
+            margin:10px 0;
+        }
+
+        .description{
+            color:#555;
+        }
+
+        .owner{
+            margin-top:10px;
+            color:#888;
+            font-size:14px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Product List</h1>
+
+<div class="container">
+
+    {% for product in products %}
+    <div class="card">
+
+        {% if product.product_image %}
+            <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+        {% endif %}
+
+        <div class="card-body">
+            <h3>{{ product.product_name }}</h3>
+
+            <p class="price">₹{{ product.price }}</p>
+
+            <p class="description">
+                {{ product.description }}
+            </p>
+
+            <p class="owner">
+                Added by: {{ product.user.name }}
+            </p>
+        </div>
+
+    </div>
+    {% empty %}
+        <h3>No products available.</h3>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

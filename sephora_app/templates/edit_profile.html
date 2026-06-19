@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile</title>
+</head>
+<body>
+
+<h2>Edit Profile</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label>Name</label>
+    <input type="text" name="name" value="{{ user.name }}"><br><br>
+
+    <label>Email</label>
+    <input type="email" name="email" value="{{ user.email }}"><br><br>
+
+    <label>Profile Picture</label>
+    <input type="file" name="profile_pic"><br><br>
+
+    <button type="submit">Update Profile</button>
+
+</form>
+
+</body>
+</html>
