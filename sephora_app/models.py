@@ -18,6 +18,6 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     product_image = models.ImageField(upload_to='products/')
     created_at = models.DateTimeField(auto_now_add=True)
-
+    stock = models.PositiveIntegerField(default=1)
     def __str__(self):
         return self.product_name 

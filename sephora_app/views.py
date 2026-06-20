@@ -98,6 +98,7 @@ def add_product(request):
             product_name=request.POST.get('product_name'),
             description=request.POST.get('description'),
             price=request.POST.get('price'),
+            stock=request.POST.get('stock'),
             product_image=request.FILES.get('product_image')
         )
 
@@ -107,3 +108,44 @@ def add_product(request):
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'product_list.html', {'products': products})
+  
+
+def my_products(request):
+    products = Product.objects.all()
+
+    return render(request, 'my_products.html', {'products': products
+    })
+     
+def edit_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+
+    if request.method == 'POST':
+        product.product_name = request.POST.get('product_name')
+        product.description = request.POST.get('description')
+        product.price = request.POST.get('price')
+
+        # Only if your model has a stock field
+        product.stock = request.POST.get('stock')
+
+        if request.FILES.get('product_image'):
+            product.product_image = request.FILES['product_image']
+
+        product.save()
+
+        return redirect('my_products')
+
+    return render(request, 'edit_product.html', {
+        'product': product
+    })
+def delete_product(request, product_id):
+    email = request.session.get('email')
+    user = UserRegister.objects.get(email=email)
+    product = get_object_or_404(
+        Product,
+        id=product_id,
+        user=user
+    )
+
+    product.delete()
+
+    return redirect('my_products')
