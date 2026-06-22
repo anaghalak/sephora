@@ -63,6 +63,21 @@
             color:#888;
             font-size:14px;
         }
+        .cart-btn{
+    width:100%;
+    padding:10px;
+    margin-top:15px;
+    background:#28a745;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+    .cart-btn:hover{
+    background:#218838;
+}
     </style>
 </head>
 <body>
@@ -89,9 +104,17 @@
             </p>
 
             <p class="owner">
-                Added by: {{ product.user.name }}
+                
+             Added by: {{ product.user.name }}
             </p>
-        </div>
+
+
+            <form action="{% url 'add_to_cart' product.id %}" method="POST">
+              {% csrf_token %}
+                <button type="submit" class="cart-btn">
+                Add to Cart
+             </button>
+            </form>
 
     </div>
     {% empty %}

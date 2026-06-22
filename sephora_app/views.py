@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import UserRegister,Product
+from .models import UserRegister,Product,Cart
 def index(request):
     return render(request,'index.html')
 def home(request):
@@ -149,3 +149,73 @@ def delete_product(request, product_id):
     product.delete()
 
     return redirect('my_products')
+
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    email = request.session.get('email')
+    userd = UserRegister.objects.get(email=email)
+    print(userd)
+
+    cart_item, created = Cart.objects.get_or_create(
+        user=userd,
+        product=product
+    )
+
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return redirect('edit_cart')
+
+
+def edit_cart(request):
+    email = request.session.get('email')
+    user = UserRegister.objects.get(email=email)
+
+    cart_items = Cart.objects.filter(user=user)
+
+    total = 0
+    for item in cart_items:
+        total += item.product.price * item.quantity
+
+    return render(
+        request,
+        'edit_cart.html',
+        {
+            'cart_items': cart_items,
+            'total': total
+        }
+    )
+
+
+def update_cart(request, cart_id):
+    email = request.session.get('email')
+    user = UserRegister.objects.get(email=email)
+    cart_item = get_object_or_404(
+        Cart,
+        id=cart_id,
+        user=user
+    )
+
+    if request.method == "POST":
+        quantity = int(request.POST.get('quantity'))
+
+        if quantity > 0:
+            cart_item.quantity = quantity
+            cart_item.save()
+
+    return redirect('edit_cart')
+
+
+def remove_cart_item(request, cart_id):
+    email = request.session.get('email')
+    user = UserRegister.objects.get(email=email)
+    cart_item = get_object_or_404(
+        Cart,
+        id=cart_id,
+        user=user
+    )
+
+    cart_item.delete()
+
+    return redirect('edit_cart')

@@ -19,5 +19,21 @@ class Product(models.Model):
     product_image = models.ImageField(upload_to='products/')
     created_at = models.DateTimeField(auto_now_add=True)
     stock = models.PositiveIntegerField(default=1)
+
+class Cart(models.Model):
+    user = models.ForeignKey(
+        UserRegister,
+        on_delete=models.CASCADE
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE
+    )
+    quantity = models.PositiveIntegerField(default=1)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'product')
+
     def __str__(self):
-        return self.product_name 
+        return f"{self.user.name} - {self.product.product_name}"
